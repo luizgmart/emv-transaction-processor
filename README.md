@@ -1,45 +1,43 @@
-EMV Transaction Processor
+# 💳 EMV Transaction Processor
 
-Simulação de um módulo básico de processamento de transações EMV, desenvolvido em Go, seguindo princípios de Clean Architecture, com validações de domínio, mocks, persistência e testes automatizados.
+> Simulação de um módulo básico de processamento de transações EMV, desenvolvido em Go, seguindo princípios de Clean Architecture, com validações de domínio, mocks, persistência e testes automatizados.
 
-🎯 Objetivo do Projeto
+---
 
-Este projeto foi desenvolvido como desafio técnico para simular o fluxo de uma transação EMV entre um terminal de pagamento (POS) e um cartão com chip.
+## 🎯 Objetivo
 
-O foco está em:
+Este projeto simula o fluxo de uma transação EMV entre um terminal de pagamento (POS) e um cartão com chip, com foco em:
 
-Processamento de dados EMV (simulados via TLV)
+- Processamento de dados EMV (TLV – Tag-Length-Value)
+- Validação de regras essenciais do domínio
+- Comunicação simulada com um gateway de pagamento
+- Persistência de transações
+- Código limpo, testável e bem estruturado
 
-Regras de negócio claras e testáveis
+---
 
-Arquitetura limpa e desacoplada
+## 🧠 Conceitos e Boas Práticas
 
-Testes unitários confiáveis
+- Clean Architecture
+- Separação de responsabilidades
+- Value Objects para regras de domínio
+- Use Cases como núcleo da aplicação
+- Injeção de dependências
+- Mocks para integrações externas
+- Testes unitários focados em regras de negócio
 
-🧠 Conceitos Aplicados
+---
 
-Clean Architecture
+## 🏗 Estrutura do Projeto
 
-Separação de responsabilidades
-
-Value Objects para regras de domínio
-
-Use Cases como núcleo da aplicação
-
-Injeção de dependências
-
-Mocks para simular integrações externas
-
-Testes unitários focados em regras de negócio
-
-🏗 Estrutura do Projeto
+```text
 emv-transaction-processor/
-├── cmd/api                # Entry point da aplicação (main)
+├── cmd/api                # Entry point da aplicação
 ├── internal/
 │   ├── domain/
-│   │   ├── valueobject    # Regras de negócio (PAN, Expiry, CVM)
+│   │   ├── valueobject    # PAN, Expiry e CVM
 │   │   └── entity         # Entidades do domínio
-│   ├── usecase            # Casos de uso da aplicação
+│   ├── usecase            # Casos de uso
 │   └── adapter/
 │       ├── gateway        # Gateway de autorização (mock)
 │       └── persistence    # Persistência em JSON
@@ -56,33 +54,33 @@ Expiry (Data de validade)
 
 CVM (Cardholder Verification Method)
 
-Validação dos dados segundo regras EMV:
+Validação das regras:
 
-PAN entre 13 e 19 dígitos + algoritmo de Luhn
+PAN entre 13 e 19 dígitos com algoritmo de Luhn
 
 Data de validade não expirada
 
 CVM suportado (PIN ou SIGNATURE)
 
-Comunicação com um gateway mock para autorização
+Autorização via gateway mock
 
-Retorno do resultado da transação (aprovada ou rejeitada)
+Retorno do resultado (aprovada ou rejeitada)
 
 Persistência da transação em arquivo JSON
 
 🧪 Testes Automatizados
 
-Os testes unitários cobrem as partes críticas do domínio, garantindo previsibilidade e segurança:
+Os testes unitários cobrem as partes críticas do domínio:
 
 Validação de PAN
 
-Validação de data de validade
+Validação de Expiry
 
 Validação de CVM
 
-Fluxo completo do caso de uso de transação
+Fluxo completo do caso de uso
 
-Executar todos os testes
+Executar os testes
 go test ./...
 
 
@@ -91,12 +89,12 @@ Saída esperada:
 ok internal/domain/valueobject
 ok internal/usecase
 
-▶️ Como Executar o Projeto
+▶️ Executando a Aplicação
 Pré-requisitos
 
-Go 1.20 ou superior
+Go 1.20+
 
-Executar a aplicação
+Rodar o projeto
 
 Na raiz do projeto:
 
@@ -108,9 +106,9 @@ Saída esperada:
 Transação aprovada: &{true}
 
 
-Após a execução, um arquivo transactions.json será criado automaticamente contendo o registro da transação.
+O arquivo transactions.json será criado automaticamente com o registro da transação.
 
-🧩 Exemplo de Saída (JSON)
+🧾 Exemplo de Persistência (JSON)
 [
   {
     "PAN": "4539682995824395",
