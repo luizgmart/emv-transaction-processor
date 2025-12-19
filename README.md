@@ -1,4 +1,4 @@
-# 💳 EMV Transaction Processor (Clean Architecture)
+# 💳 EMV Transaction Processor
 
 A simple **EMV transaction processing simulator** implemented in **Go**, following **Clean Architecture** principles. The project validates card data, simulates authorization through a mock gateway, and persists transactions to a JSON file.
 
