@@ -1,85 +1,85 @@
 # 💳 EMV Transaction Processor
 
-A simple **EMV transaction processing simulator** implemented in **Go**, following **Clean Architecture** principles. The project validates card data, simulates authorization through a mock gateway, and persists transactions to a JSON file.
+Um **simulador simples de processamento de transações EMV**, desenvolvido em **Go**, seguindo os princípios de **Clean Architecture**. O projeto valida dados de cartão, simula uma autorização por meio de um gateway mock e persiste as transações em um arquivo JSON.
 
-## 🏗 Project Structure
+## 🏗 Estrutura do Projeto
 
 ```text
 emv-transaction-processor/
-├── cmd/api                # Application entry point
+├── cmd/api                # Ponto de entrada da aplicação
 ├── internal/
 │   ├── domain/
-│   │   ├── valueobject    # PAN, Expiry, CVM
-│   │   └── entity         # Domain entities
-│   ├── usecase            # Business use cases
+│   │   ├── valueobject    # PAN, Expiry e CVM
+│   │   └── entity         # Entidades do domínio
+│   ├── usecase            # Casos de uso (regras de negócio)
 │   └── adapter/
-│       ├── gateway        # Mock authorization gateway
-│       └── persistence   # JSON-based persistence
+│       ├── gateway        # Gateway de autorização (mock)
+│       └── persistence   # Persistência em JSON
 ├── go.mod
-└── transactions.json      # Auto-generated
+└── transactions.json      # Gerado automaticamente
 ```
 
-## 🔄 EMV Transaction Flow (Simulated)
+## 🔄 Fluxo da Transação EMV (Simulado)
 
-1. Card data input:
+1. Entrada dos dados do cartão:
 
    * PAN (Primary Account Number)
-   * Expiry date
+   * Data de validade (Expiry)
    * CVM (Cardholder Verification Method)
-2. Business rule validation:
+2. Validação das regras de negócio:
 
-   * PAN length (13–19 digits) with **Luhn algorithm**
-   * Expiry date must not be expired
-   * Supported CVM (**PIN** or **SIGNATURE**)
-3. Authorization via **mock gateway**
-4. Transaction result (approved or declined)
-5. Persistence of the transaction into a **JSON file**
+   * PAN entre **13 e 19 dígitos**, validado pelo **algoritmo de Luhn**
+   * Data de validade não expirada
+   * CVM suportado (**PIN** ou **SIGNATURE**)
+3. Autorização da transação via **gateway mock**
+4. Retorno do resultado (aprovada ou rejeitada)
+5. Persistência da transação em um **arquivo JSON**
 
-## 🧪 Automated Tests
+## 🧪 Testes Automatizados
 
-Unit tests cover the critical domain logic:
+Os testes unitários cobrem as partes críticas do domínio:
 
-* PAN validation
-* Expiry validation
-* CVM validation
-* Complete use case flow
+* Validação de PAN
+* Validação de Expiry
+* Validação de CVM
+* Fluxo completo do caso de uso
 
-### Run tests
+### Executar os testes
 
 ```bash
 go test ./...
 ```
 
-Expected output:
+Saída esperada:
 
 ```text
 ok internal/domain/valueobject
 ok internal/usecase
 ```
 
-## ▶️ Running the Application
+## ▶️ Executando a Aplicação
 
-### Prerequisites
+### Pré-requisitos
 
 * Go **1.20+**
 
-### Run
+### Rodar o projeto
 
-From the project root:
+Na raiz do projeto:
 
 ```bash
 go run ./cmd/api
 ```
 
-Expected output:
+Saída esperada:
 
 ```text
-Transaction approved: &{true}
+Transação aprovada: &{true}
 ```
 
-The file `transactions.json` will be automatically created with the transaction record.
+O arquivo `transactions.json` será criado automaticamente com o registro da transação.
 
-## 🧾 Persistence Example (JSON)
+## 🧾 Exemplo de Persistência (JSON)
 
 ```json
 [
@@ -91,12 +91,12 @@ The file `transactions.json` will be automatically created with the transaction 
 ]
 ```
 
-## 🎯 Purpose
+## 🎯 Objetivo do Projeto
 
-This project demonstrates:
+Este projeto demonstra:
 
-* Clean Architecture in Go
-* Strong domain validation using Value Objects
-* Testable and decoupled business logic
-* A simplified EMV transaction processing flow
+* Aplicação de **Clean Architecture** em Go
+* Uso de **Value Objects** para validações fortes de domínio
+* Regras de negócio desacopladas e testáveis
+* Simulação simplificada de um fluxo de processamento EMV
 
