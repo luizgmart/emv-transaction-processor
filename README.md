@@ -1,100 +1,87 @@
-# 💳 EMV Transaction Processor
+# 💳 EMV Transaction Processor (Clean Architecture)
 
-> Simulação de um módulo de processamento de transações EMV, desenvolvido em Go, seguindo princípios de Clean Architecture, com validações de domínio, mocks, persistência e testes automatizados.
+A simple **EMV transaction processing simulator** implemented in **Go**, following **Clean Architecture** principles. The project validates card data, simulates authorization through a mock gateway, and persists transactions to a JSON file.
 
----
-
-## 🎯 Objetivo
-
-Este projeto simula o fluxo de uma transação EMV entre um terminal de pagamento (POS) e um cartão com chip, com foco em:
-
-- Processamento de dados EMV (TLV – Tag-Length-Value)
-- Validação de regras essenciais do domínio
-- Comunicação simulada com um gateway de pagamento
-- Persistência de transações
-- Código limpo, testável e bem estruturado
-
----
-
-## 🧠 Conceitos e Boas Práticas
-
-- Clean Architecture
-- Separação de responsabilidades
-- Value Objects para regras de domínio
-- Use Cases como núcleo da aplicação
-- Injeção de dependências
-- Mocks para integrações externas
-- Testes unitários focados em regras de negócio
-
----
-
-## 🏗 Estrutura do Projeto
+## 🏗 Project Structure
 
 ```text
 emv-transaction-processor/
-├── cmd/api                # Entry point da aplicação
+├── cmd/api                # Application entry point
 ├── internal/
 │   ├── domain/
-│   │   ├── valueobject    # PAN, Expiry e CVM
-│   │   └── entity         # Entidades do domínio
-│   ├── usecase            # Casos de uso
+│   │   ├── valueobject    # PAN, Expiry, CVM
+│   │   └── entity         # Domain entities
+│   ├── usecase            # Business use cases
 │   └── adapter/
-│       ├── gateway        # Gateway de autorização (mock)
-│       └── persistence    # Persistência em JSON
+│       ├── gateway        # Mock authorization gateway
+│       └── persistence   # JSON-based persistence
 ├── go.mod
-└── transactions.json      # Gerado automaticamente
+└── transactions.json      # Auto-generated
+```
 
+## 🔄 EMV Transaction Flow (Simulated)
 
+1. Card data input:
 
-🔄 Fluxo da Transação EMV (Simulado)
+   * PAN (Primary Account Number)
+   * Expiry date
+   * CVM (Cardholder Verification Method)
+2. Business rule validation:
 
-Entrada dos dados do cartão:
+   * PAN length (13–19 digits) with **Luhn algorithm**
+   * Expiry date must not be expired
+   * Supported CVM (**PIN** or **SIGNATURE**)
+3. Authorization via **mock gateway**
+4. Transaction result (approved or declined)
+5. Persistence of the transaction into a **JSON file**
 
-PAN (Primary Account Number)
+## 🧪 Automated Tests
 
-Expiry (Data de validade)
+Unit tests cover the critical domain logic:
 
-CVM (Cardholder Verification Method)
+* PAN validation
+* Expiry validation
+* CVM validation
+* Complete use case flow
 
-Validação das regras:
-PAN entre 13 e 19 dígitos com algoritmo de Luhn
-Data de validade não expirada
-CVM suportado (PIN ou SIGNATURE)
-Autorização via gateway mock
-Retorno do resultado (aprovada ou rejeitada)
-Persistência da transação em arquivo JSON
+### Run tests
 
-
-🧪 Testes Automatizados
-Os testes unitários cobrem as partes críticas do domínio:
-Validação de PAN
-Validação de Expiry
-Validação de CVM
-Fluxo completo do caso de uso
-
-
-Executar os testes
+```bash
 go test ./...
+```
 
-Saída esperada:
+Expected output:
+
+```text
 ok internal/domain/valueobject
 ok internal/usecase
+```
 
-▶️ Executando a Aplicação
-Pré-requisitos
-Go 1.20+
+## ▶️ Running the Application
 
-Rodar o projeto
-Na raiz do projeto:
+### Prerequisites
+
+* Go **1.20+**
+
+### Run
+
+From the project root:
+
+```bash
 go run ./cmd/api
+```
 
-Saída esperada:
-Transação aprovada: &{true}
+Expected output:
 
+```text
+Transaction approved: &{true}
+```
 
-O arquivo transactions.json será criado automaticamente com o registro da transação.
+The file `transactions.json` will be automatically created with the transaction record.
 
-🧾 Exemplo de Persistência (JSON)
+## 🧾 Persistence Example (JSON)
+
+```json
 [
   {
     "PAN": "4539682995824395",
@@ -102,3 +89,14 @@ O arquivo transactions.json será criado automaticamente com o registro da trans
     "CreatedAt": "2025-01-18T20:45:12Z"
   }
 ]
+```
+
+## 🎯 Purpose
+
+This project demonstrates:
+
+* Clean Architecture in Go
+* Strong domain validation using Value Objects
+* Testable and decoupled business logic
+* A simplified EMV transaction processing flow
+
