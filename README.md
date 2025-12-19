@@ -1,6 +1,6 @@
 # 💳 EMV Transaction Processor
 
-> Simulação de um módulo básico de processamento de transações EMV, desenvolvido em Go, seguindo princípios de Clean Architecture, com validações de domínio, mocks, persistência e testes automatizados.
+> Simulação de um módulo de processamento de transações EMV, desenvolvido em Go, seguindo princípios de Clean Architecture, com validações de domínio, mocks, persistência e testes automatizados.
 
 ---
 
