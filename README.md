@@ -2,7 +2,6 @@
 
 A simple EMV transaction processing simulator built in Go, following Clean Architecture principles. The project validates card data, simulates authorization through a mock gateway, and persists transactions to a JSON file.
 
-🏗 Project Structure
 emv-transaction-processor/
 ├── cmd/api                # Application entry point
 ├── internal/
