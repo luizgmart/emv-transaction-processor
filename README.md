@@ -22,56 +22,69 @@ emv-transaction-processor/
 
 
 
-## 🔄 EMV Transaction Flow (Simulated)
+🔄 EMV Transaction Flow (Simulated)
+Card data input
 
-### Card data input
+PAN (Primary Account Number)
 
-- PAN (Primary Account Number)  
-- Expiry date  
-- CVM (Cardholder Verification Method)  
+Expiry date
 
-### Business rule validation
+CVM (Cardholder Verification Method)
 
-- PAN between 13 and 19 digits, validated using the Luhn algorithm  
-- Expiry date must not be expired  
-- Supported CVM (PIN or SIGNATURE)  
+Business rule validation
 
-### Processing steps
+PAN between 13 and 19 digits, validated using the Luhn algorithm
 
-- Transaction authorization via mock gateway  
-- Result returned (approved or rejected)  
-- Transaction persisted to a JSON file  
+Expiry date must not be expired
 
----
+Supported CVM (PIN or SIGNATURE)
 
-## 🧪 Automated Tests
+Processing steps
+
+Transaction authorization via mock gateway
+
+Result returned (approved or rejected)
+
+Transaction persisted to a JSON file
+
+🧪 Automated Tests
 
 Unit tests cover critical domain components:
 
-- PAN validation  
-- Expiry validation  
-- CVM validation  
-- Full use case flow  
+PAN validation
 
-### Run tests
+Expiry validation
 
-```bash
+CVM validation
+
+Full use case flow
+
+Run tests
 go test ./...
+
+
 Expected output:
 
 ok internal/domain/valueobject
 ok internal/usecase
+
 ▶️ Running the Application
 Prerequisites
+
 Go 1.20+
 
 Run the project
+
 From the project root:
 
 go run ./cmd/api
+
+
 Expected output:
 
 Transaction approved: &{true}
+
+
 The transactions.json file will be automatically created with the transaction record.
 
 🧾 Persistence Example (JSON)
@@ -82,7 +95,9 @@ The transactions.json file will be automatically created with the transaction re
     "CreatedAt": "2025-01-18T20:45:12Z"
   }
 ]
+
 🎯 Project Purpose
+
 This project demonstrates:
 
 Clean Architecture implementation in Go
@@ -92,3 +107,13 @@ Use of Value Objects for strong domain validation
 Decoupled and testable business rules
 
 Simplified simulation of an EMV processing flow
+
+🚀 Tech Stack
+
+Go
+
+Clean Architecture
+
+JSON Persistence
+
+Unit Testing (Go testing package)
