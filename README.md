@@ -4,17 +4,19 @@ A simple EMV transaction processing simulator built in Go, following Clean Archi
 
 🏗 Project Structure
 emv-transaction-processor/
-├── cmd/api                # Application entry point
+├── cmd/
+│   └── api                 # Application entry point
 ├── internal/
 │   ├── domain/
-│   │   ├── valueobject    # PAN, Expiry, and CVM
-│   │   └── entity         # Domain entities
-│   ├── usecase            # Use cases (business rules)
+│   │   ├── valueobject     # PAN, Expiry, and CVM
+│   │   └── entity          # Domain entities
+│   ├── usecase             # Use cases (business rules)
 │   └── adapter/
-│       ├── gateway        # Authorization gateway (mock)
-│       └── persistence   # JSON persistence
+│       ├── gateway         # Authorization gateway (mock)
+│       └── persistence    # JSON persistence
 ├── go.mod
-└── transactions.json      # Automatically generated
+└── transactions.json       # Automatically generated
+
 
 🔄 EMV Transaction Flow (Simulated)
 Card data input
