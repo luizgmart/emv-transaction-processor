@@ -2,6 +2,7 @@
 
 A simple EMV transaction processing simulator built in Go, following Clean Architecture principles. The project validates card data, simulates authorization through a mock gateway, and persists transactions to a JSON file.
 
+🏗 Project Structure
 emv-transaction-processor/
 ├── cmd/api                # Application entry point
 ├── internal/
@@ -16,7 +17,7 @@ emv-transaction-processor/
 └── transactions.json      # Automatically generated
 
 🔄 EMV Transaction Flow (Simulated)
-Card data input:
+Card data input
 
 PAN (Primary Account Number)
 
@@ -24,7 +25,7 @@ Expiry date
 
 CVM (Cardholder Verification Method)
 
-Business rule validation:
+Business rule validation
 
 PAN between 13 and 19 digits, validated using the Luhn algorithm
 
@@ -32,9 +33,14 @@ Expiry date must not be expired
 
 Supported CVM (PIN or SIGNATURE)
 
+Processing steps
+
 Transaction authorization via mock gateway
+
 Result returned (approved or rejected)
+
 Transaction persisted to a JSON file
+
 🧪 Automated Tests
 
 Unit tests cover critical domain components:
@@ -95,4 +101,3 @@ Use of Value Objects for strong domain validation
 Decoupled and testable business rules
 
 Simplified simulation of an EMV processing flow
-
